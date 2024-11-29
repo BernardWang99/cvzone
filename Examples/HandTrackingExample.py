@@ -1,10 +1,15 @@
+from picamera2 import Picamera2
+import cvzone
 from cvzone.HandTrackingModule import HandDetector
 import cv2
 
 # Initialize the webcam to capture video
 # The '2' indicates the third camera connected to your computer; '0' would usually refer to the built-in camera
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 
+picam2 = Picamera2()
+picam2.configuration(picam2.creat_preview_configuration(main={"format": "RGB888", "size": (1280, 960)}))
+picam2.start()
 
 # Initialize the HandDetector class with the given parameters
 detector = HandDetector(staticMode=False, maxHands=2, modelComplexity=1, detectionCon=0.5, minTrackCon=0.5)
@@ -13,7 +18,9 @@ detector = HandDetector(staticMode=False, maxHands=2, modelComplexity=1, detecti
 while True:
     # Capture each frame from the webcam
     # 'success' will be True if the frame is successfully captured, 'img' will contain the frame
-    success, img = cap.read()
+    #success, img = cap.read()
+
+    img = picam2.capture_array()
 
     # Find hands in the current frame
     # The 'draw' parameter draws landmarks and hand outlines on the image if set to True
