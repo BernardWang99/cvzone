@@ -11,6 +11,8 @@ picam2 = Picamera2()
 picam2.configuration(picam2.creat_preview_configuration(main={"format": "RGB888", "size": (1280, 960)}))
 picam2.start()
 
+### this is a test
+
 # Initialize the HandDetector class with the given parameters
 detector = HandDetector(staticMode=False, maxHands=2, modelComplexity=1, detectionCon=0.5, minTrackCon=0.5)
 
